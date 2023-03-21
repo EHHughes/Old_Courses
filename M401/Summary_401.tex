@@ -1,0 +1,280 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH401 Summary \\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/Assignment_2/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\begin{document}
+
+\maketitle
+
+\section*{Flows and Interval Maps}
+In this course we will study two main types of dynamical systems: flows and iterated maps. 
+Throughout we will let $X$ be a compact metric space and $I_d$ the identity automorphism 
+on this space.
+
+\begin{definition}[Flows]
+    A flow is a parameterized family of functions defined for all $X$ and for all $t \in mathbb{R}$ 
+    then $\{\psi\}_{t\in\mathbb{R}}$ is a flow if and only if 
+
+    \begin{itemize}
+        \item $\psi_0 = I_d$
+        \item $(\psi_t)^{-1} = \psi_{-t}$
+        \item $\psi_{s+t} = \psi_s \circ \psi_t$
+    \end{itemize}
+
+    This flow also defines a unique differential equation \(\dot{x} = F(x) \coloneqq \frac{d}{dt}\psi_t(x)|_{t=0}\).
+\end{definition}
+
+\begin{definition}[Iterated Maps]
+    A dynamical system induced by a iterated map is a parameterized family of functions defined for all $X$ and for all $n \in mathbb{N}$ 
+    then $\{f^n\}_{n \in \mathbb{N}}$ is a family where 
+    
+    \begin{align*}
+        f^0 &= I_d \\
+        f^1 &= f \\
+        f^2 & = f \circ f \\
+        \dots& \\
+        f^n(x) = f \circ f \circ \dots \circ f(x)
+    \end{align*}
+
+    If $f$ is invertible then the family can be extended to be defined over $\mathbb{Z}$ in an obvious manner.
+\end{definition}
+
+One can then define the orbit of a point $x_0$ under flows or iterated maps by considering the parameterized 
+family of functions as a group or semi-group acting on $X$. If the orbit contains only one 
+point, then $x_0$ is a fixed point. If the orbit is finite and of size $q$ then $x_0$ is a $q$-periodic point. 
+
+
+\begin{definition}[Attracting Fixed Points of Maps]
+    A fixed point $p^*$ of an iterated map $f$ is attracting if there exists some open neighborhood $N$ such that 
+
+    \begin{equation*}
+        x \in N qquad \lim_{n \rightarrow \infty}f^n(x) = p^*
+    \end{equation*}
+
+    $N$ is an attracting neighborhood and the largest connected $N$ is called the immediate basin of 
+    attraction. 
+\end{definition}
+
+There is an obvious analogous definition for the fixed points of flows. We can now make further remarks 
+about necessary conditions for fixed points to be attracting.
+
+\begin{theorem}
+    If $f$ is differentiable on $X$ and has a fixed point at $p^*$ then this fixed point is attracting 
+    if $|f'(p^*)| < 1$.
+\end{theorem}
+
+A periodic orbit of size $q$ of a map is attracting if each $x_i \in \{x_1,x_2,\dots,x_q\}$ are 
+attracting fixed points of $f^q$. Fortunately it is sufficient to instead verify the following 
+simpler condition
+
+\begin{definition}[Attracting Periodic Orbits of Maps]
+    If $\Gamma = \{x_n\}_{n=1}^q$ is a periodic orbit of size $q$ and $f$ is differentiable at each point 
+    in $\Gamma$ then $\Gamma$ is attracting if 
+
+    \begin{equation*}
+        \Pi_{x \in \Gamma}|f(x)'|<1
+    \end{equation*}
+\end{definition}
+
+It is often desirable to know when periodic points of such maps are guaranteed to exist. Fortunately 
+this is straightforward to demonstrate
+
+\begin{theorem}
+    Let $I$ be a subinterval of $X$ and $q > 0$. Then 
+
+    \begin{enumerate}
+        \item If $I \cap f^q(I) \neq \emptyset$ then $I$ contains a point fixed by $f^q$.
+        \item If $I_0,I_1,\dots,I_k$ is a sequence of intervals such that each $I_{j+1} \subseteq I_j$ 
+        for all $0 \leq j < q$ and $I_0 \subseteq f(I_{q-1})$ then $\bar{I_0}$ contains a point fixed 
+        by $f^q$.
+    \end{enumerate}
+\end{theorem}
+
+\section*{Hyperbolicity}
+It is usually more convenient to work with the linearization of maps and/or flows rather than 
+the full non-linear dynamics. Fortunately, this simplification is permissible near hyperbolic 
+fixed points. 
+
+\begin{definition}[Hyperbolic Fixed Points]
+    A fixed point of a map is hyperbolic if the Jacobian derivative has no eigenvalues 
+    of modulus 1. A fixed point of a flow is hyperbolic if the Jacobian derivative of the 
+    vector field has eigenvalues with real part zero.
+\end{definition}
+
+\begin{theorem}[Hartman-Grobman for Maps]
+    If $x^*$ is a hyperbolic fixed point of $f$ then there exists a neighborhood $N$ of $x^*$ 
+    and a unique `near identity' homeomorphism $h:N \rightarrow \mathbb{R}^d$ such that $h(x^*) = 0$ 
+    and $h(f(x)) = DT(x^*)h(x)$ for all $x \in N$.
+\end{theorem}
+
+An analogous result holds for flows. However, if we want to analyze the fixed points of flows, 
+we will need more sophisticated machinery. In particular, it is useful to introduce the concept 
+of variational equations.
+
+\begin{lemma}[Variational Equations]
+    Given a Linearization of a flow $\{\Psi_\tau(x_0)\}$ satisfy the coupled system of $d+d^2$ 
+    equations. 
+
+    \begin{align*}
+        \dot{x} &=F(x) \quad x(0) = x_0 \\
+        \dot{\Psi} = DF(x)\Psi \quad \Psi_0 = I_d
+    \end{align*}
+\end{lemma}
+
+This matrix $\Psi$ is known as the Floquet matrix. In practice, we usually wish to use the Poincare 
+map to find out information about the stability of periodic orbits. To begin, let us choose a 
+Poincare section
+
+\begin{definition}[Poincare Sections]
+    Let $\Sigma$ be a $d-1$ dimensional surface (it is usually convenient to let this be the 
+    zero set of some function $S$). This surface is a valid Poincare section if it is transverse to 
+    the flow (that is $\nabla S \cdot F \neq 0$ for all $x$). Then the Poincare map is the first 
+    return map on this section.
+\end{definition}
+
+From this we can obtain information about the Floquet matrix and visa-versa.
+
+\begin{theorem}[Eigenvalue Equivalence Principle]
+    If $\Gamma$ is a period $\tau$ orbit and $x_0$ is a point on valid Poincare section intersecting 
+    this orbit then the set of eigenvalues of the linearized Poincare Map is equal to the eigenvalues of 
+    the Floquet matrix less one eigenvalue equal to one.
+\end{theorem}
+
+\section*{Invariant Manifolds}
+
+\begin{theorem}[Invariant Manifold Theorem]
+Let $f$ be a $C^r$ diffeomorphism and let $x^*$ be a hyperbolic fixed point. Then there exists 
+an open neighborhood $N$ of $x^*$ such that the local stable and unstable manifolds exist, have 
+the same dimension as equivalent subspace and are tangent to that subspace.
+\end{theorem}
+
+\begin{definition}[Global Stable Manifold]
+    The global stable manifold is given by 
+
+    \begin{equation*}
+        W^s(x^*) = \{x:f^n(x) \rightarrow x^* \quad \text{as} \quad n \rightarrow \infty\} = \cup_{n=0}f^{-n}W^s_{loc}(x^*)
+    \end{equation*}
+\end{definition}
+
+if $W^s(x^*) \cup W^u(y^*)$ for two fixed points this implies a `heteroclinic connection' between 
+these fixed points. If $y^* = x^*$ then this is a homoclinic orbit. For non-hyperbolic fixed 
+points there is a similar result to the existence for theorems for manifolds we have used 
+above.
+
+\begin{theorem}[Center Manifold Theorem]
+    Let $x^*$ be a non-hyperbolic fixed point of $C^r$ dynamical system. To the splitting $E^s \oplus E^u \oplus E^c$ 
+    there correspond locally invariant manifolds $W^s$, $W^u$ and $W^c$ which are tangent to 
+    their respective subspaces. Furthermore $W^s$ and $W^u$ are unique, but $W^c$ may not be unique.
+\end{theorem}
+
+\section*{Topological Conjugacy}
+
+\begin{definition}[Topological Conjugacy]
+    We say $(Y,g)$ and $(X,f)$ are topologically conjugate if there exists a homeomorphism $h:X\rightarrow Y$ 
+    such that $h \circ f = g \circ h$. Since $h$ is invertible we can also write this as 
+    $h \circ f \circ h^{-1} = g$.
+\end{definition}
+
+It is also useful to define the notion of an $\omega$ limit set.
+
+\begin{definition}[$\omega$ limit set]
+    The $\omega$ limit set of a point $x^*$ is 
+
+    \begin{equation*}
+        \omega(x^*) = \lim_{n\rightarrow \infty}\cap_{k=n}^\infty \bar{\mathcal{O}^+(f^k(x_0))}
+    \end{equation*}
+\end{definition}
+
+This allows us to define a notion of an attracting invariant set
+
+\begin{definition}[Attracting Invariant Sets]
+    An invariant set $\Omega$ is attracting if there is an open set $U$ such that $\Omega \subset U$ 
+    and for $x \in U \implies \omega(x) \subset \Omega$. The largest set such that this prior 
+    property holds is called the basin of attraction.
+\end{definition}
+
+\section*{Chaos}
+
+\begin{definition}[Chaos in the sense of Devaney]
+    A dynamical system $(X,f)$ is called if it has an invariant set $\Omega$ such that 
+
+    \begin{enumerate}
+        \item Periodic points are dense in $\Omega$.
+        \item There is at least one $x$ such that $\mathcal{O}^+(x)$ is dense in $\Omega$.
+        \item The system restricted to $\Omega$, $f_\Omega$ has sensitive dependence to initial 
+        conditions. There is a $\delta_0$ such that for any $x \in \Omega$ and $\epsilon > 0$ there 
+        exists an $x' \in \Omega$ and $n \in \mathbb{N}$ such that $d(x,x') < \epsilon$ but $d(f^n(x),f^n(x')) > \delta_0$. 
+    \end{enumerate}
+\end{definition}
+
+There is some redundancy in the chaos conditions. In particular we have that 
+
+\begin{theorem}
+    Let $X$ be complete, $f$ continuous and $\Omega$ a non-empty transitive invariant set. Then if 
+    periodic points are dense in $\Omega$ then either $\Omega$ is a single periodic orbit or $f$ 
+    is chaotic on $\Omega$.
+\end{theorem}
+
+There is a useful transitivity lemma 
+
+\begin{lemma}[Transitivity Lemma]
+    Let $\emptyset \neq \Omega \subseteq X$ be invariant, satisfy chaos conditions 1 and 2 and not 
+    be a single periodic orbit. Then 
+
+    \begin{enumerate}
+        \item $\Omega$ has no isolated points.
+        \item If $U$, $V$ with $U \cap \Omega \neq \emptyset$ and $V \cap \Omega \neq \emptyset$ 
+        there is an $n \geq 0$ such that $\Omega \cap T^n(U) \cap V \neq \emptyset$. 
+    \end{enumerate}
+\end{lemma}
+
+Finally we require the notion of a semi-conjugacy 
+
+\begin{definition}
+    A function $\psi:X \rightarrow Y$ is a semi-conjugacy if $\psi \circ f = g \circ \psi$ but 
+    $\psi$ is not invertible.
+\end{definition}
+
+We can now construct a condition for chaos in one space implying chaos in the other
+
+\begin{theorem}
+    Let $\Omega$ be an chaotic invariant set for $(f,X)$ and let $\psi$ be a semi-conjugacy between 
+    $X$ and $Y$. Then either $\psi(\Omega)$ is a single periodic orbit of $g$ in $Y$ or a chaotic 
+    invariant set of $g$ in $Y$.
+\end{theorem}
+
+\end{document}

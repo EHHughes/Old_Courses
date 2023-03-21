@@ -1,0 +1,39 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH411 Assignment 1\\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+
+\begin{document}
+
+\maketitle
+
+\end{document}

@@ -1,0 +1,130 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH425 Assignment 1\\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{mathrsfs}
+
+\begin{document}
+
+\maketitle
+
+\section*{W3Q3}
+We wish to show that $\sum_{n=0}^\infty f_n(x)$, $f_n(x) = x^{2n}(1-x)^2$ converges 
+uniformly on $x \in [0,1]$. For $x \in [0,1)$ this series is a geometric series with common 
+ratio $x^2$ and initial term $(1-x)^2$. Since $|x^2|<1$ on this interval this implies that the series converges to the sum 
+
+\begin{equation*}
+	\frac{(1-x)^2}{1-x^2} = \frac{(1-x)(1-x)}{(1-x)(1+x)} = \frac{1-x}{1+x}
+\end{equation*}
+
+This function $f(x) = (1-x)/(1+x)$ is continuous on $[0,1)$. At $x = 1$ every term of the series is zero and 
+$(1-1)/(1+1) = 0$, so the series converges pointwise to the limiting function $f(x) = (1-x)/(1+x)$ 
+for all $x \in [0,1]$. Note that $(1-x)x^{2n} \geq 0$ for all $x \in [0,1]$ and for all $n \in N$, so 
+the sequence of partial sums of $f_n$ is monotone. Then, since $f$ is continuous on $[0,1]$ and $[0,1]$ is a 
+compact subset, it follows that convergence of the series is uniform by the partial converse presented 
+on page 11 of the notes.
+
+\section*{W4Q3}
+\subsection*{(a)}
+Consider a convergent sequence $\{f_n\}_{n=1}^\infty$ in $\mathscr{C}[-T,T]$, with $f_n(T) = f_n(-T) = 0$ for 
+all $n \in \mathbb{N}$. Since convergence in $\mathcal{C}[-T,T]$ is equivalent to uniform convergence 
+on this interval, it is clear that $\lim_{n \rightarrow \infty}f_n(T) = 0$ as $f_n(T) = 0\quad \forall n \in \mathbb{N}$. 
+Therefore, since $T$ is a limit point of $[-T,T]$ it follows that 
+$\lim_{x \rightarrow T}f(x) = 0$ (by the result on page 9). By an identical argument it also 
+follows that $\lim_{x \rightarrow -T}f(x) = 0$. Then since $f$ is continuous on $[-T,T]$ it follows 
+that $f(-T) = \lim_{x \rightarrow -T}f(x) = \lim_{x \rightarrow T}f(x) = f(T) = 0$. Thus $f \in \mathcal{C}[-T,T]$ 
+and $f(-T) = f(T) = 0$. 
+
+\paragraph{}
+Consider a sequence $\{f_n\}_{n=1}^\infty \subset V_T$ which is convergent in $\mathcal{C}(\mathbb{R})$. Then each $f_n$ can be written 
+
+\begin{equation*}
+	f_n(x) = 
+	\begin{cases}
+		f_n^{V_T}(x),&  x \in [-T,T] \\
+		0 & x \notin [-T,T]
+	\end{cases}
+\end{equation*}
+
+Where each $f_n^{V_T}(x)$ is a continuous and bounded function from $[-T,T]$ to $\mathbb{C}$ and 
+$f_n^{V_T}(-T) = f_n^{V_T}(T) = 0$. Note this is required for continuity of $f_n$ as if 
+$f_n^{V_T}(T) \neq 0$ then clearly there exists some $\epsilon = |f_n^{V_T}(T)|$ such that 
+for all $\delta > 0$ there exists some $x_* > T$ with $|x_* - T| < \delta$ but $|f_n(x_*) - f_n(T)| = \epsilon$ 
+(an identical argument requires that $f_n^{V_T}(-T) = 0$). Since 
+$\{f_n\}_{n=1}^\infty$ is uniformly convergent in $\mathcal{C}(\mathbb{R})$ 
+it is clear that $\{f_n^{V_T}\}_{n=1}^\infty$ must be uniformly convergent on $[-T,T]$. Then by the result above 
+$\{f_n^{V_T}\}_{n=1}^\infty$ converges to some $f^{V_T}$ with $f^{V_T}(-T) = f^{V_T}(T) = 0$. Therefore the function 
+
+\begin{equation*}
+	f(x) = 
+	\begin{cases}
+		f^{V_T}(x),&  x \in [-T,T] \\
+		0 & x \notin [-T,T]
+	\end{cases}
+\end{equation*}
+
+Is in $V_T$. Furthermore since $\|f_n - f\|_\infty = \|f_n^{V_T} - f^{V_T}\|_\infty$ (as for $x \notin [-T,T]$, $|f_n(x) - f(x)| = 0$) and $f_n^{V_T}$ converges 
+uniformly to $f^{V_T}$ it follows that $f_n$ converges uniformly to $f$. Thus for any sequence 
+$f_n \in V_T$ it follows that this function converges in $\mathcal{C}(\mathbb{R})$ to $f \in V_T$. \
+Therefore $V_T$ is closed.
+
+\subsection*{(b)}
+Consider the series $\sum_{n=1}^\infty f_n(x)$ on $\mathbb{R}$ where 
+
+\begin{equation*}
+	f_n(x) = 
+	\begin{cases}
+		0, & x < n \\
+		\frac{1}{n}x -1, & n \leq x < n + \frac{1}{2} \\
+		-\frac{1}{n}x + \frac{n+1}{n}, & n+\frac{1}{2} \leq x < n+1 \\
+		0, & x \geq n+1
+	\end{cases}
+\end{equation*}
+
+Note that the maxima of the absolute value of each $f_n$ is clearly $1/2n$. Then for $\forall \epsilon > 0$ there exists $N \in \mathbb{N}$ such that $1/N <\epsilon$ by 
+the Archimedean property. For $k,m \geq N$ we have 
+
+\begin{equation*}
+	\left\|\sum_{n =1}^k f_n(x) -  \sum_{n=1}^m f_n(x)\right\|_\infty \leq \frac{1}{2N} < \epsilon
+\end{equation*}
+
+So this series is Cauchy in $\mathcal{C}(\mathbb{R})$ and it consequently must converge as this 
+space is complete. Note that each of these partial sums $\sum_{n=1}^m f_n(x)$ with $m \in \mathbb{N}$ 
+is equal to zero for all $x > m+1$ so each term in this sequence is contained in $\bigcup_{T > 0}V_T$. 
+However for any $V_T$ there exists some $m' \in \mathbb{N}$ such that $m' > T$ and consequently 
+$f_{m'} \notin V_T$. Therefore the limit of this series is not in $\bigcup_{T > 0}V_T$ and so this 
+space is not complete.
+
+
+
+
+\end{document}

@@ -1,0 +1,403 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH411 Assignment 1\\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{Assignment_1.bib}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{1.1.1}
+Let $g,h \in G'$ so by the properties of homomorphisms we have $\phi(g)\phi(h) = \phi(gh)$ and 
+$gh \in G'$ since $G' < G$ (thus $\phi(G)$ is closed in $H$). Furthermore, if $g \in G'$ and $1$ is 
+the identity element of $G$ then $\phi(g)\phi(1) = \phi(g)$ which 
+implies that $\phi(1)$ is the identity of $H$ so $\phi(G')$ contains the identity.
+If $g \in G'$ then $g^{-1} \in G$ and $\phi(g)\phi(g^{-1}) = \phi(gg^{-1}) = \phi(1)$ so 
+for $\phi(g) \in \phi(G')$ we have $\phi(g^{-1}) = \phi(g)^{-1} \in \phi(G')$ and thus inverses exist 
+for each element in $\phi(G')$. Finally we inherit the associative property since $H$ is a group. 
+Thus $\phi(G') < H$.
+
+\subsection*{1.1.2}
+Consider $g,h \in G$. Then if $\phi(g), \phi(h) \in H'$ it follows that $\phi(gh) \in H'$ since 
+$H' < H$. Thus $\forall g,h \in \phi^{-1}(H')$ it follows that $gh \in \phi^{-1}(H')$. Furthermore 
+if $g \in G$ s.t. $\phi(g) \in H'$ then $\phi(g)^{-1} = \phi(g^{-1}) \in H'$ since $H' < H$ and 
+consequently if $g \in \phi^{-1}(H')$ then $g^{-1} \in \phi^{-1}(H')$. Combining the two 
+proceeding results
+trivially implies that $1 \in \phi^{-1}(H')$ and the associativity property is inherited from the 
+larger group $G$. Therefore $\phi^{-1}(H') < G$.
+
+\subsection*{1.1.3}
+From 1.9 (see below) there is a homomorphism from $S_3$ to some two element group (e.g. $\{1,\,(12)\}$) in $S_4$. Since 
+$S_3  \triangleleft S_3$ but $(13)(12)(13) = (23) \notin \{1,\,(12)\}$, it follows that, in general, 
+if $G' \triangleleft G$ then $\phi(G') < H$ but $\phi(G')$ may not be normal.
+
+\subsection*{1.1.4}
+Consider the homomorphism $\varphi: H \rightarrow H/H'$ defined by $\varphi(g) = gH'$. This is a 
+homomorphism as $H'$ is normal and it has kernel $H'$. It follows therefore that $\varphi \circ \phi$ 
+is also a homomorphism with $ker(\varphi \circ \phi) = \phi^{-1}(H')$ so $\phi^{-1}(H')$ is normal 
+by lemma 3.10 (in J.S. Milne's notes).
+
+\subsection*{1.2.1}
+For $h,n \in H \cap N$ we have that $hn \in H$ and $hn \in N$ so $hn \in H \cap N$. Then for 
+$h \in H \cap N$ we have $h^{-1} \in H$ as $H < G$ and $h^{-1} \in N$ by an identical argument. 
+Thus if $h \in H \cap N$ it follows that $h^{-1} \in H \cap N$ and as an immediate consequence that 
+$1 \in H \cap N$. Thus $H\cap N < G \implies H \cap N < H$ (as $H \cap N \subset H$ trivially). 
+
+\paragraph{}
+It remains to show that $H \cap N \triangleleft H$. Note that since $N$ is normal, for 
+$h,h^{-1} \in H$ and $n \in H \cap N$ we have that $hnh^{-1} \in N$ and since $h,h^{-1},n \in H$ 
+we also have that $hnh^{-1} \in H \cap N$. Thus $H \cap N$ is a normal subgroup of $H$.
+
+\subsection*{1.2.2}
+As above it is clear that $H \cap N < G$. Consider the group $ G = Sym(3)$ with $N = Sym(3)$ and 
+$H = \{1, (12)\}$. Then clearly $H \cap N = \{1, (12)\}$ but this group is not a normal 
+subgroup (e.g.$(13) \in G$ but $(13)(12)(31) = (23) \notin H$). Thus in general it is not the case that $H \cap N \triangleleft G$.
+
+\subsection*{1.2.3}
+Note that $HN$ is a subgroup as for any $h_1n_1,h_2n_2 \in HN$ we have that $h_1n_1h_2n_2 = h_1n_1n_3h_2 = h_1h_2n_4$ 
+for some $n_3,n_4 \in N$ as $N$ is normal. Thus $HN$ is closed, inverses exist as for some $h_1n_1 \in HN$ we have that 
+$(h_1n_1)^{-1} = n_1^{-1}h^{-1} = h^{-1}n_2$ for some $n_2 \in N$ (as $N$ is normal). These first two properties together 
+imply that $1 \in HN$ and so $HN < G$. 
+
+\paragraph{}
+It is further straightforward to show that this is not a normal subgroup by considering $Sym(3)$ with 
+$N = \{1\}$ and $H = \{1,(12)\}$. Clearly $HN = \{1,(12)\}$ which is not normal as previously discussed in 1.2.2.
+
+\subsection*{1.3}
+For $n = n_1 + n_2 + \dots + n_r$ we let $N = Sym(n)$. Furthermore, let $H_1 = Sym(n_1)$ 
+be the permutations of $1,2,\dots,n_1$, $H_2 = Sym(n_2)$ be the permutations of $n_1+1,n_1+2,\dots,n_1+n_2$, 
+etc for all $H_1, \dots, H_r$. Then $H_i$ is a group and since $H \subset G$ we have that $H_i < G$.
+
+\paragraph{}
+Furthermore $H_1$, $H_2$ have no elements in common except the identity, so $H_1H_2$ must have 
+$|H_1|\times|H_2|$ elements. Furthermore it is fairly straightforward to see that if $H_1H_2\dots H_k$ has $|H_1|\times |H_2| \times \dots \times |H_k|$ elements 
+then $H_1H_2\dots H_k$ has 
+no elements in common with $H_{k+1}$ except the identity so $H_1H_2\dots H_kH_{k+1}$ has 
+$|H_1|\times |H_2| \times \dots |H_k|\times |H_{k+1}|$ elements. By induction we can see that 
+$H_1H_2\dots H_n < G$ must have $\prod_{i=1}^r(n_i!)$ elements and that it must be a subgroup as each 
+constituent group has no elements in common with any of the other groups except the identity.
+Therefore $\prod_{i=1}^r(n_i!)$ divides $n!$ by Lagrange's Theorem.
+
+\subsection*{1.4}
+Note that the number of right and left cosets are the same (so $H$ must have two right and left cosets), so if $gh \in gH$ with $g \in G$, $h \in H$ 
+then either $gh \in H$ which it is clearly not (as cosets disjointly partition the group $G$) or 
+$gh \in Hg$. Therefore $gH = Hg$ and thus $H$ is normal.
+
+\subsection*{1.5}
+We have that $(\pm 1)(\pm 1) = \pm 1$, $(\pm 1)(\pm i) = \pm i$ and $(\pm i)(\pm i) = \pm 1$ so 
+$\mu_4$ is closed. Furthermore it contains the identity and $(-i)(i) = 1 = -1(-1)$ so inverses 
+exist. Thus $\mu_4$ is a subgroup. Then since $\mathbb{C}^{\times}$ is Abelian it follows that $\mu_4 \triangleleft \mathbb{C}^{\times}$.
+
+\paragraph{}
+We can define the function $\phi: \mathbb{C^\times}/\mu_4 \rightarrow \mathbb{C}^\times$ with 
+$z\mu_4 = z^4$. Note that since for $u \in \mu_4$, $u^4 = 1$, this mapping is not dependent on the 
+choice of coset leader.
+This is a homomorphism as for $w_1,w_2 \in \mathbb{C}^\times$ then $\phi(w_1\mu_4)\phi(w_2\mu_4) = w_1^4w_2^4 = (w_1w_2)^4 = \phi(w_1w_2\mu_4)$. It is also 
+injective as if $\phi(z) = \phi(w) \implies r_z^4 = r_w^4$ and that $\theta_z = \theta_w$ (mod($\pi/2)$) 
+for $z = r_ze^{i\theta_z}$, $w = r_we^{i\theta_w}$ so $z,w \in z\mu_4$. Finally it is surjective 
+as for $re^{i\theta} \in \mathbb{C}^\times$ it is clear that there exists $r^{1/4}e^{i\theta/4}$ 
+which is an element of $r^{1/4}e^{i\theta/4}\mu_4$. Therefore it follows that $\phi$ is an 
+isomorphism and so $\mathbb{C}^\times/\mu_4 \cong \mathbb{C}^\times$.
+
+\paragraph{}
+$\{\pm 1\}$ is a subgroup of $\mathbb{R}^\times$ as there exists a homomorphism $\phi:\mathbb{R}^\times \rightarrow \mathbb{R}^\times_+$ 
+(where $\mathbb{R}^\times_+$ denotes the group of positive real numbers under multiplication) 
+$\phi(x) = x^2$. This is a homomorphism as for $x,x' \in \mathbb{R}^\times$ we have $\phi(xx') = x^2x'^2 = \phi(x)\phi(x')$. 
+Then $ker(\phi) = \{\pm 1\}$ so this must be a normal subgroup by lemma 3.10.
+
+\paragraph{}
+It is useful to notice that $\mathbb{R}^\times/{\pm 1}$ is isomorphic to $\mathbb{R}^\times_+$. The 
+map $\phi: x\{\pm 1\} \rightarrow |x|$ is well-defined as clearly $\phi$ maps a coset to the same element 
+regardless of the choice of coset leader. Furthermore, it is a homomorphism as 
+for $x,y \in \mathbb{R}^\times$ we have $\phi(xy\{\pm 1\}) = |xy| = |x||y| = \phi(x\{\pm 1\})\phi(y\{\pm 1\})$. 
+It is injective as if $\phi(x\{\pm 1\}) = \phi(y\{\pm 1\}) \implies |x| = |y| \implies x = \pm y \implies x,y \in x\{\pm 1\}$. 
+It is also surjective as for $x \in \mathbb{R}^\times_+$ we have $\phi(x\{\pm 1\}) = |x| = x$. Therefore 
+these two groups are isomorphic.
+
+\paragraph{}
+Thus the problem can be reduced to the somewhat simpler question: is $\mathbb{R}^\times_+$ isomorphic 
+to $\mathbb{R}^\times$? If an isomorphism $\varphi$ from $\mathbb{R}^\times$ to $\mathbb{R}^\times_+$ does exist, this implies that $\varphi(1) = 1$ 
+by the properties of isomorphisms. Therefore we have that $\varphi((-1)(-1)) = 1$ and so 
+$\varphi(-1)\varphi(-1) = 1$. It follows that $\varphi(-1)^{-1} = \varphi(-1)$ and so this 
+element of $\mathbb{R}^\times_+$ is its own inverse. But the only element in $\mathbb{R}^\times_+$ mapped to 
+itself by $x \rightarrow x^2$ is $x = 1$. Therefore $\varphi$ cannot be an isomorphism as it is 
+not injective and so we obtain a contradiction. Thus it follows that $\mathbb{R}^\times/\{\pm 1\}$ is 
+not isomorphic to $\mathbb{R}^\times$.
+
+
+
+\subsection*{1.6}
+Let $G$ be a group and $H,N < G$. Then for $h_1,h_2 \in H$ and $g \in G$ we have 
+
+\begin{equation*}
+	gh_1g^{-1}gh_2g^{-1} = gh_1h_2g^{-1} \in gHg^{-1}
+\end{equation*}
+
+and since $h_1^{-1} \in H$ it follows that $gh_1^{-1}g^{-1} \in gHg^{-1}$ and therefore 
+$gh_1g^{-1}gh_1^{-1}g^{-1} = gg^{-1} = 1$. Thus $gHg^{-1}$ is a subgroup. 
+
+\paragraph{}
+Define the following relation $H \sim N$ iff $H = gNg^{-1}$ for some $g \in G$. 
+This is reflexive as $H = 1H1^{-1} = H$, symmetric as if $H = gNg^{-1}$ then $g^{-1}H = Ng^{-1}$ 
+and thus $g^{-1}H(g^{-1})^{-1} = N$. It is also transitive as for $H_1,H_2,H_3 < G$ with 
+$H_1 \sim H_2$ and $H_2 \sim H_3$ we have for some $g_1, g_2 \in G$
+
+\begin{equation*}
+	H_1 = g_1H_2g_1^{-1}, \qquad H_2 = g_2H_3g_2^{-1} \implies H_1 = g_1g_2H_3g_2^{-1}g_1^{-1} = (g_1g_2)H_3(g_1g_2)^{-1}
+\end{equation*}
+
+So $\sim$ is a valid equivalence relation.
+
+\paragraph{}
+Considering the group $Sym(3)$ there are the following subgroups $\{1\}$, $\{1,(13)\}$, $\{1,(23)\}$, $\{1, (12)\}$,
+$\{1, (123), (132)\}$ and $Sym(3)$. Clearly the trivial subgroup and the group itself will not be conjugate to any other subgroups, as 
+$g1g^{-1} = 1$ for all $g \in Sym(3)$. For $\{1,(13)\}$ we have that $(23)(13)(23) = (12)$ and that 
+$(13)(12)(13) = (23)$ so $\{1, (12)\} \sim \{1,(13)\} \sim \{1, (23)\}$ by the properties of 
+equivalence relations. Therefore each belong to the same equivalence class.
+
+\paragraph{}
+Finally for 
+$\{1, (123), (132)\}$ we have that for each of $(12)$, $(13)$, $(23)$, the conjugacy operator 
+returns the original subgroup $\{1, (123), (132)\}$. 
+
+\begin{align*}
+	(12)(123)(12) &= (132) \\
+	(12)(132)(12) &= (123) \\
+	(13)(123)(13) &= (132) \\
+	(13)(132)(13) &= (123) \\
+	(23)(123)(23) &= (132) \\
+	(23)(132)(23) &= (123)
+\end{align*}
+
+
+Therefore this subgroup belongs in its own 
+equivalence class. So the equivalence classes of $Sym(3)$ are the trivial group, the groups of 
+order two, the group of order three and the group itself.
+
+\subsection*{1.7}
+The group $GL_n(F_q)$ is the set of all invertible $n \times n$ matrices with coefficients 
+drawn from $F_q$ under matrix multiplication, which is equivalent to the set of all $n \times n$ 
+matrices with coefficients drawn from $F_q$ that have full rank. This is equivalent to the 
+statement that all columns are linearly independent in $F_q$, so we can construct a matrix in 
+this group by selecting $n$ columns that are each linearly independent relevant criteria.
+
+\paragraph{}
+Proceeding column by column, we 
+can see that in the first column of some matrix in this group, each element can chosen freely except that the column cannot 
+be entirely zeros. Consequently, there are $q^n -1$ valid choices for the coefficients in the 
+second column. In the second column any combination of coefficients can be chosen, except those 
+which are a scalar multiple of the first column. Therefore, there are $g^n -q$ valid choices for 
+the second column. In fact, in the $j^{th}$ column, the requirement that this column be linearly 
+independent of all previous columns implies that there are $q^n$ choices, less all linear combinations 
+of the previous columns (of which there are clearly $q^{j-1}$). This enables us to construct the 
+following formula for $|GL_n(F_q)|$.
+
+\begin{equation*}
+	|GL_n(F_q)| = \prod_{i=1}^n(q^n-q^{i-1})
+\end{equation*}
+
+\subsection*{1.8}
+$GL_n(F_{11})$ contains $SL_n(F_{11})$ where $F_{11} \cong \mathbb{Z}/11\mathbb{Z}$. Note that 
+$SL_n(F_{11})$ is a normal subgroup as for $A \in GL_n{F_{11}}$ and $B \in SL_n(F_{11})$ we have 
+$det(ABA^{-1}) = det(A)det(B)det(A^{-1}) = det(A)det(A)^{-1} = 1$ by properties of the determinant, 
+so $ABA^{-1} \in SL_n(F_{11})$.
+
+\paragraph{}
+Then by the correspondence theorem $\exists \varPhi$ a bijection with 
+
+\begin{equation*}
+	\varPhi:\{H|SL_n(F_{11}) < H < GL_n(F_{11})\} \rightarrow \left\{\tilde H: \tilde H < \frac{GL_n(F_{11})}{SL_n(F_{11})}\right\}
+\end{equation*}
+
+This bijection preserves normality, so that if $\tilde H$ is normal then it also follows that 
+$H$ is also normal. It is given in the notes that $GL_n(F_{11})/SL_n(F_{11})$ is isomorphic to $F_{11}$. Then note that there exists an isomorphism from $F_{11}$ to $\mathbb{Z}/11\mathbb{Z}$ 
+and that isomorphisms preserve normality (if $ghg^{-1} \in H$ for $h \in H$ then $\phi(ghg^{-1}) = \phi(g)\phi(h)\phi(g)^{-1} \in \phi(H)$)
+so all the normal subgroups of $GL_n(F_{11})$ which contain $SL_n(F_{11})$ correspond to a subgroup of 
+$(\mathbb{Z}/11\mathbb{Z})^\times$.
+
+\paragraph{}
+Note that this group is equivalent to a cyclic group of order 10 (e.g. choose $6$ as the generator) 
+and so all subgroups must have order 1, 2, 5, or 10. Clearly there is only group of order 1 and 
+one group of order 10 as these groups are the trivial subgroup and the entire group respectively. 
+The groups generated by iterating one of the other elements in this group can be discerned from the 
+multiplication table below
+
+\begin{align*}
+	&2^2 = 4, \quad 2^3 = 8, \quad 2^4 \cong 5, \quad 2^5 = 10, \quad 2^6 \cong 9, \quad 2^7 \cong 7, \quad 2^8 \cong 3, \quad 2^9 \cong 6, \quad 2^{10} \cong 1 \\
+	&3^2 = 9, \quad 3^3 \cong 5, \quad 3^4 \cong 4, \quad 3^5 \cong 1 \\
+	&4^2 \cong 5, \quad 4^3 \cong 9, \quad 4^4 \cong 3, \quad 4^5 \cong 1 \\
+	&5^2 \cong 3, \quad 5^3 \cong 4, \quad 5^4 \cong 9, \quad 5^5 \cong 1 \\
+	&6^2 \cong 3, \quad 6^3 \cong 7, \quad 6^4 \cong 9, \quad 6^5 \cong 10, \quad 6^6 \cong 5, \quad 6^7 \cong 8, \quad 6^8 \cong 4, \quad 6^9 \cong 2, \quad 6^{10} \cong 1 \\
+	&7^2 \cong 5, \quad 7^3 \cong 2, \quad 7^4 \cong 3, \quad 7^5 \cong 10, \quad 7^6 \cong 4, \quad 7^7 \cong 6, \quad 7^8 \cong 9, \quad 7^9 \cong 8, \quad 6^{10} \cong 1 \\
+	&8^2 \cong 9, \quad 8^3 \cong 6, \quad 8^4 \cong 4, \quad 8^5 \cong 10, \quad 8^6 \cong 3, \quad 8^7 \cong 2, \quad 8^8 \cong 5, \quad 8^9 \cong 7, \quad 8^{10} \cong 1 \\
+	&9^2 \cong 4, \quad 9^3 \cong 3, \quad 9^4 \cong 5, \quad 9^5 \cong 1 \\
+	&10^2 \cong 1
+\end{align*}
+
+So clearly there is only one subgroup of order 2: $\{1, 10\}$ and one subgroup of order 5: $\{1,3,4,5,9\}$. 
+Thus there are four subgroups (which are all normal as this group is Abelian). Therefore 
+$F_{11}^\times$ has four normal subgroups and consequently there are four subgroups of $GL_n(F_{11})$ 
+which contain $SL_n(F_{11})$ and all of them are normal.
+
+\subsection*{1.9}
+We wish to find all homomorphisms from $S_3 \rightarrow S_4$. If $\phi:S_3 \rightarrow S_4$ is 
+a homomorphism then $ker(\phi) \triangleleft S_3$ so all homomorphisms must have as a kernel 
+a normal subgroup of $S_3$. $S_3$ has six subgroups (two of order two and one of order 
+three, the trivial group and the group itself). Each group of order two is not normal as 
+
+\begin{equation*}
+	(12)\{1,(23)\}(12) = \{1, (13)\} 
+\end{equation*}
+
+Note this holds for any subgroup of order two as our choice of elements is arbitrary (e.g. it is clear 
+that one can replace $(12)$ and $(13)$ with any other pair of distinct order two elements of $S_3$ and 
+obtain an identical result, see 1.6 for details). Then the 
+subgroup of order 3 elements is normal as for $(12)(123)(12) = (132)$ (see 1.6 above). So it follows that each 
+homomorphism is easily decomposable (by the homomorphism theorem) to composition of functions, 
+one of which is an homomorphism on $S_3: g \rightarrow g/ker(\phi)$ and one of which is an isomorphism 
+between $S_3$ and $im(\phi)$. Therefore we can reduce our problem to finding all unique isomorphisms 
+between $S_3/H$ and $G < S_4$ where $H$ is a normal subgroup of $S_3$. The groups $S_3/H$ are as 
+follows; $S_3/1 \cong S_3$, $S_3/S_3 \cong 1$ and $S_3/\{1, (123), (132)\} \cong \{1, a\}$ (where $a^2 = 1$). 
+
+\paragraph{}
+If $\phi: S_3 \rightarrow 1$ this is clearly a unique homomorphism. If $\phi : S_3 \rightarrow \{1, a\}$ 
+then this homomorphism must map to a group of order 2 in $S_4$. This group will therefore contain 
+an element of order 2 and the identity. There are six two-cycles in $S_4$, $(12),(13),(14),(23),(24),(34)$ 
+and there are three combinations of two-cycles which have no elements in common (any combination of 
+two-cycles where they share a vertex in common is equivalent to an element of order 3). So there are 
+nine possible possible homomorphisms which map $S_3$ to an element a group of order two in $S_4$. 
+
+\paragraph{}
+Finally a homomorphism $\phi$ may map $S_3$ to $im(\phi) \cong S_3 < S_4$. Therefore we 
+need a subgroup with three elements of order two and two elements of order three with the relation 
+that if $a$ and $b$ have order two then $ab$ has order three. Clearly as well as $S_3$ there is 
+also the following three groups $\{1,(14),(24),(12),(124),(142)\}$, $\{1,(24),(34),(23),(234),(243)\}$, 
+$\{1,(14),(13),(14),(134),(143)\}$. 
+
+\paragraph{}
+Note that it is impossible to construct a group of isomorphic to $S_3$ that contains an element 
+of order two made up of two disjoint two-cycles. This is clear as the product of three 
+two cycles in $S_4$ (two of which are mutually disjoint) produces an element of order four (e.g. 
+$(12)(34)(13) = (1432)$ and $(13)(34)(12) = (1234)$) and the product of two pairs of disjoint 
+two cycles produces an element of order two (e.g. $(12)(34)(13)(24) = (14)(23)$). By renaming 
+vertices in this permutation (e.g. by replacing 1 with 2 and visa-versa) it is straightforward 
+to show this holds true for any possible way to combine elements of $S_4$ with these properties.
+Consequently any subset of $S_4$ which contains an element comprised of two disjoint two-cycles 
+cannot be isomorphic to $S_3$.
+
+\paragraph{}
+Therefore if $im(\phi) \cong S_3$ it must be equal to one of these these four groups. 
+Since $\phi$ is a homomorphism it must map two-cycles in $S_3$ to elements of order two in $im(\phi)$. 
+For each of the possible sets comprising $im(\phi)$ there are clearly six different ways to map 
+the two cycles to each other (as there are 3! ways to permute three elements). Then since each 
+element of order three is a product of two two-cycles the mapping is fully determined 
+by the choice of which two-cycles in $S_3$ are mapped to which two-cycles in $im(\phi)$, so there 
+are 24 different homomorphisms which map $S_3$ to $im(\phi) \cong S_4$.
+
+\paragraph{}
+Therefore 
+there are $9 + 1 + 24 = 34$ possible homomorphisms from $S_3$ to $S_4$. 
+
+\subsection*{1.10}
+It is convenient to consider Abelian and non-Abelian groups separately.
+
+\paragraph{Abelian Groups}
+By Corollary 8.7 of the notes, we can see that if $G$ is an Abelian group of order 8, it 
+must be isomorphic to a direct product of groups $H_1,\, H_2,\dots, H_k$ with $H_i \cong \mathbb{Z}/n_i\mathbb{Z}$. 
+Since the order of $G$ is clearly the product of the orders of $H_1,\, H_2, \dots, H_n$ it follows 
+that $\prod_{i=1}^{k}n_i = 8$. Therefore, all possible Abelian groups must be isomorphic to 
+one of 
+
+\begin{align*}
+	M_1 &\cong \frac{\mathbb{Z}}{8\mathbb{Z}} \\
+	M_2 &\cong \frac{\mathbb{Z}}{2\mathbb{Z}}\times\frac{\mathbb{Z}}{4\mathbb{Z}} \\
+	M_3 &\cong \frac{\mathbb{Z}}{2\mathbb{Z}}\times \frac{\mathbb{Z}}{2\mathbb{Z}} \times \frac{\mathbb{Z}}{2\mathbb{Z}}
+\end{align*}
+
+It remains to show that none of these groups are not isomorphic to each other. $M_1$ contains 
+elements of order 8, but for $(a_1,a_2) \in M_2$ we have $4(a_1,a_2) = (4a_1,4a_2) = 1$ as each 
+element in $\mathbb{Z}/2\mathbb{Z}$ or $\mathbb{Z}/4\mathbb{Z}$ has at most order four. Therefore 
+$M_2$ contains no elements of order 4 and consequently it cannot be isomorphic to $M_1$. By an 
+identical argument we can see that for $(a_1,a_2,a_3) \in M_3$ we have $2(a_1,a_2,a_3) = (2a_1,2a_2,2a_3) = 1$. 
+Thus $M_1$ cannot be isomorphic to $M_3$. Furthermore, since there are elements in $\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/4\mathbb{Z}$ 
+which have order four (e.g. $(1,1)$ has order four) it follows that $M_2$ and $M_3$ are not isomorphic. 
+Thus we can conclude that each of these groups are not isomorphic to each other and so there are 
+three Abelian groups of order 8. 
+
+\paragraph{Non-Abelian Groups}
+By Langrange's theorem, we know that even non-Abelian groups of order 8 can only contain elements of order 
+2, 4 and 8. In fact, if a group of order 8 contains an element of order 8 this clearly implies that 
+it is isomorphic to the cyclic group of order 8 (which is Abelian). So we can limit ourselves to 
+considering non-Abelian groups containing only elements of 4 and 2. First consider the case 
+where for all $a,b$ elements of this group of order two we have that $ab$ is also of order two. Then $abab = e$ so $(ab)^{-1} = ab$ but 
+by definition $(ab)^{-1} = b^{-1}a^{-1} = ba$ so $ab = ba$. Therefore it follows that the group 
+is in fact Abelian and that any non-Abelian group must in fact include an element of order four. 
+
+\paragraph{}
+Let $G$ be a non-Abelian group of order 8 with $a$ an element of order four. Suppose 
+that then there exists some element $b$ of order two, which is not in $<a>$. This implies that the 
+eight elements of this group can be written as \{$1$, $a$, $a^2$, $a^3$, $ab$, $ab^2$, $ab^3$, $b$\}. Since 
+the group has eight elements in it, it follows that $ba$, $ba^2$, $ba^3$ 
+must each be mapped to some element inside this set. If $ba^n = a^m$ for some $n,m \in \{1,2,3\}$ 
+then $b = a^{n-m}$ by cancellation, which is a contradiction of our initial hypothesis that $b$ 
+is not in $<a>$. Therefore $ba^n = a^mb$ for each $n,m \in \{1,2,3\}$.
+
+
+\paragraph{}
+If $ba = ab$ then $a^2b = aba = ba^2$ and $a^3b = ba^3$ so the whole 
+group is Abelian. If $ba = a^2b$ then $a = ba^2b$ and so $a^2 = ba^2bba^2b = 1$ which is a 
+contradiction. Therefore $ba = a^3b$. If $ba^2 = ab$ then $a^2 = bab$ so $a^4 = ba^2b = 1$ 
+so $a^2 = 1$ which is a contradiction. This implies that $ba^2 = ab^2$ (as trivially $ba^2 = a^3b$ 
+implies that $ba = ba^2$ which is an obvious contradiction). Finally this implies that $ba^3 = ab$ 
+and so this group can be expressed as $< a,b \quad | \quad  a^4 = b^2 = 1, \, ab = ba^{-1} >$ 
+(note this is isomorphic to the Dihedral group of order 4).
+
+\paragraph{}
+Now we will consider the case where all elements in $G$ that are not in the subgroup 
+$<a>$ have order four. Then for $b \neq a^n$ for some $n \in [0,4]$ it follows that $b$ has order 
+four and that $b^2$ has order two. This implies that $b^2 = a^2$ by our assumption. This suggests 
+that the group contains the following elements $1$, $a$, $a^2$, $a^3$, $b$, $ab$, $a^2b$, $a^3b$. 
+Since this group has order 8 it must also be true that $ba$, $ba^2$ and $ba^3$ are equivalent 
+to elements inside this group. Clearly $a^2b = b^3 = ba^2$. Then if $ba = ab$ and $ba^3 = a^3b$ then 
+this group is Abelian, but by assumption it was not. Therefore $ba = a^3b$ and $ab = ba^3$. 
+This forms a closed group, which can be expressed as $< a,b \quad | \quad a^4 = b^4 = 1,\, a^2 = b^2,\, ab = ba^3 >$ 
+(note that $ab = ba^3 \implies a^3b = ba$ as $a^3b = a^2ba^3 = b^3a^3 = ba^5 = ba$ as required). 
+This is isomorphic to the Quarternion group. 
+
+\paragraph{}
+There are therefore three Abelian group and two Non-Abelian groups of order 8, for a total of 
+five groups. Groupprops suggests there are 267 groups of order 64 \cite{Groupprops}.
+
+\printbibliography
+\end{document}

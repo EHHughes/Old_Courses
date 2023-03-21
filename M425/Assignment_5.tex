@@ -1,0 +1,91 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH425 Assignment 5\\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{mathrsfs}
+
+\begin{document}
+
+\maketitle
+
+\section*{W8Q4}
+Consider the sequence of functions $f_n$ given by $f_1(x) = x$ and $f_{n+1}(x) = 1 + \frac{1}{f_n(x)}$. 
+Then if $|f_n(x) - f_n(y)| < \delta$ for some $n \in \mathbb{N}$ and $\delta > 0$ it follows that 
+
+\begin{align*}
+    |f_{n+1}(x) - f_{n+1}(y)| &= \left|1 + \frac{1}{f_n(x)} -1 - \frac{1}{f^n(x)} \right| \\
+    &= \left|\frac{1}{f_n(x)} - \frac{1}{f_n(y)} \right| \\
+    &= \frac{|f_n(x) - f_n(y)|}{|f_n(x)f_n(y)|} \\
+    &< \frac{\delta}{|f_n(x)f_n(y)|}
+\end{align*}
+
+Consequently if $|x - y| <\delta$ and $x,y \geq 1$ we have $|f_1(x) - f_1(y)| < \delta$, $|f_2(x) - f_2(y)| < \delta/xy$ 
+and for $f_i$, $i \geq 2$ we have 
+
+\begin{equation*}
+	|f_n(x) - f_n(y)| < \frac{\delta}{\Pi_{i=1}^{n-1}|f_i(x)f_i(y)|}
+\end{equation*}
+
+Then since $x,y \geq 1$ it follows trivially that $f_n(x),f_n(y) > 1$ for all $n > 1$ and so $|f_n(x) - f_n(y)| < \delta$. 
+Therefore, for all $\epsilon > 0$ and for all $n \in \mathbb{N}$ one can choose $\delta = \epsilon$ 
+such that, if $x,y > 1$ and $|x -y | < \delta$ then $|f_n(x) -f_n(y)| < \epsilon$. Thus this family 
+is equicontinuous.
+
+
+\section*{W9Q3}
+Consider $f \in \mathcal{F}$ and $z_0 \in B(0,1)$ and choose $D = \overline{B(0,r)}$, $r > 0$ such that 
+$z_0 \in D^o$ (where $D^o$ denotes the interior of $D$). Let $a = \min\{z - z_0\}$ for 
+$z \in \partial D$. It follows from the Cauchy integral formula that 
+
+\begin{align*}
+	|f(z_0)| &= \left|\int_{\partial D}\frac{f(z)}{z-z_0}dz \right| \\
+	&\leq \int_0^{2\pi}\left|\frac{f(re^{i\theta})}{re^{i\theta}-z_0} \right|d\theta \\
+	&\leq \int_0^{2\pi}\frac{|f(re^{i\theta})|}{a}d\theta \\
+	&\leq \frac{1}{a}\int_0^{2\pi}|f(re^{i\theta})|^pd\theta \leq \frac{C}{a}
+\end{align*}
+
+Thus for every $f \in \mathcal{F}$ and $z_0 \in B(0,1)$, $|f(z_0)| \leq C/a$ and thus this family 
+is uniformly bounded on $B(0,1)$. Since uniform boundedness on $B(0,1)$ implies uniform boundedness 
+on every compact subset of $B(0,1)$ it follows that every sequence $\{f_i\}_{j =1}^{\infty} \subseteq \mathcal{F}$ 
+is bounded on compact sets on $B(0,1)$. Therefore the family $\mathcal{F}' = \{f_j\}_{j = 1}^{\infty}$ 
+contains a convergent sequence $\{f_k\}_{k=1}^{\infty}$ by Montel's theorem. Since for each $j \in \mathbb{N}$ 
+there are only a finite number of numbers in $\mathbb{N}$ less than $j$, one can define a new 
+sequence $\{f_{k'}\}_{k'=1}^{\infty}$ by letting $f_{1} \in \{f_{k'}\}_{k' =1}^{\infty}$ equal 
+$f_1 \in \{f_k\}_{k=1}^\infty$ and for $f_{i} \in \{f_k'\}_{k' =1}^\infty$ let $f_{i+1}$ be 
+first term in $\{f_k\}_{k=1}^\infty$ with a higher index in $\{f_k\}_{k=1}^{\infty}$ and 
+such that the matching term in $\{f_j\}_{j=1}^{\infty}$ has a higher index than the term matching $f_{i}$. 
+To phrase this more informally, we are requiring that the the next term in $\{f_{k'}\}_{k' = 1}^{\infty}$ is 
+further along in both sequences. Then $\{f_{k'}\}_{k=1}^\infty$ is a subsequence of both $\{f_k\}_{k=1}^\infty$ 
+and $\{f_j\}_{j=1}^\infty$ and since $\{f_k\}_{k=1}^{\infty}$ is convergent it must also converge on compact sets, so the desired result is obtained. 
+
+
+\end{document}

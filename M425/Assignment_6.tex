@@ -1,0 +1,187 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH425 Assignment 6\\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{mathrsfs}
+
+\begin{document}
+
+\maketitle
+
+\section*{W10Q1}
+It will be useful to show that $f_n(x)$ is bounded for $n \geq 2$. Clearly $f_{n+1}$ is well-defined if 
+$f_n$ is well-defined and has no zeros on $(0,\infty)$. Since $f_1(x) = x$ 
+is well-defined on the whole interval each $f_n$ is also well-defined by induction. It is 
+hopefully obvious that if $f_n(x) > 0$ on the interval then $f_{n+1}(x) > 1 > 0$ on the interval 
+and since $f_1(x) > 0$ for $x \in (0,\infty)$ it follows by induction that $f_n(x) > 1$ on 
+the interval for all $n \geq 1$. For $n \geq 2$ we have $f_n(x) = 1 + 1/f_{n-1}(x)$ and 
+
+\begin{equation*}
+    f_{n+1}(x) = 1 + \frac{1}{f_n(x)} = 1 + \frac{1}{1 + \frac{1}{f_{n-1}(x)}} = 1 + \frac{f_{n-1}(x)}{f_{n-1}(x) + 1} \leq 2
+\end{equation*}
+
+For $n > 2$ let 
+
+\begin{equation*}
+    d = \sup_{x \in (0,\infty)}\left\{\left|f_n(x) - \frac{1+\sqrt{5}}{2} \right|\right\}
+\end{equation*}
+
+Then for any $x \in (0,\infty)$ we have 
+
+\begin{align*}
+    \left|f_{n+1}(x) - \frac{1+\sqrt{5}}{2}\right| &= \left| 1 + \frac{1}{f_n(x)} - \frac{1+\sqrt{5}}{2} \right| \\
+    &= \left| \frac{1}{f_n(x)} + \frac{1-\sqrt{5}}{2} \right| \\
+    &= \left|\frac{2 + f_n(x)(1-\sqrt{5})}{2f_n(x)}\right| \\
+    &\leq \frac{1}{2}|2 + f_n(x)(1-\sqrt{5})| \\
+    &= \frac{1}{2}\left|2 + \left(f_n(x) - \frac{1 + \sqrt{5}}{2}+ \frac{1 + \sqrt{5}}{2}\right)(1-\sqrt{5}) \right|\\
+    &= \frac{1}{2}\left|2  + \frac{1}{2}(1+\sqrt{5})(1-\sqrt{5}) + \left(f_n(x) - \frac{1 + \sqrt{5}}{2}\right)(1-\sqrt{5})\right|\\
+    &=\frac{1}{2}\left|\left(f_n(x) - \frac{1 + \sqrt{5}}{2}\right)(1-\sqrt{5}) \right|
+\end{align*}
+
+It follows from this that 
+
+\begin{align*}
+    \sup_{x \in (0,\infty)}\left\{\left|f_{n+1}(x) - \frac{1+\sqrt{5}}{2} \right|\right\} \leq \sup_{x \in (0,\infty)}\left\{\left|\frac{1-\sqrt{5}}{2}\left(f_n(x) - \frac{1 + \sqrt{5}}{2}\right)\right|\right\}
+\end{align*}
+
+Consider the sequence
+
+\begin{equation*}
+    \{M_n\}_{n=1}^{\infty}, \qquad M_n = \sup_{x \in (0,\infty)}\left\{\left|f_{n+2}(x) - \frac{1+\sqrt{5}}{2} \right|\right\}
+\end{equation*}
+
+Since $f_3$ is bounded, $M_1$ exists and then for all $n \geq 1$, $M_n \leq \left(\frac{|1 - \sqrt{5}|}{2}\right)^{n-1}M_1$. 
+Then $\frac{|1 - \sqrt{5}|}{2} < 1$ and $M_n \geq 0$ for all $n$ by construction, so the squeezing 
+theorem implies that $M_n$ must converge to zero. Therefore for all $\epsilon > 0$ one can choose 
+$N \in \mathbb{N}$ such that $M_n < \epsilon$ which implies that for all $x \in (0,\infty)$ and 
+$n > N+2$ we have
+
+\begin{equation*}
+    \left|f_n(x) - \frac{1 + \sqrt{5}}{2}\right| < \epsilon
+\end{equation*}
+
+Thus $f_n(x)$ converges uniformly. While the proof that this sequence converges uniformly is 
+somewhat involved, it is straightforward to demonstrate that this is not equicontinuous. In 
+particular, it is sufficient to demonstrate that one of the functions in this 
+family is not uniformly continuous. Consider $f_2(x) = 1 + 1/x$. Then for $x,y \in (0,\infty)$ 
+we have 
+
+\begin{equation*}
+    |f_2(x) - f_2(y)| = \left|1 + \frac{1}{x} - 1 - \frac{1}{y} \right| = \frac{|x - y|}{xy}
+\end{equation*}
+
+Let $\epsilon = 1/2$. Then for any $1 > \delta > 0$ we can choose $x,y \in (0,\infty)$ such that $\delta/2 <|x -y| < \delta$ 
+and $x,y < \delta$. This leads to 
+
+\begin{equation*}
+    |f_2(x) - f_2(y)| = \frac{|x - y|}{xy} > \frac{\delta}{2\delta^2} = \frac{1}{2\delta} > \frac{1}{2}
+\end{equation*}
+
+So this function is not uniformly continuous and the family as a whole is not equicontinuous.
+
+\subsection*{W11Q2}
+Note that $|\sin(z) - 3z^2 -1 + 3z^2 +1| \leq |\sin(z)-3z^2-1| + |3z^2+1|$. Furthermore, this 
+inequality will be strict at every point except where $|\sin(z) - 3z^2-1| = |\sin(z)| - |3z^2+1|$. 
+If $z_0$ is such a point then a trivial rearrangement of the above condition leads to 
+
+\begin{equation*}
+    \left|\frac{\sin(z_0)}{3z_0^2+1} -1 \right| = \left|\frac{\sin(z_0)}{3z_0^2+1}\right| - 1
+\end{equation*}
+
+Let the real and imaginary parts of this fraction be given by $\alpha$ and $\beta$ respectively. 
+The above condition can then be manipulated as follows
+
+\begin{align*}
+    \sqrt{(\alpha-1)^2 + \beta^2} &= \sqrt{\alpha^2 + \beta^2} - 1\\
+    \alpha^2 + 1 + \beta^2 - 2\alpha &= \alpha^2 + \beta^2 +1 -2\sqrt{\alpha^2+\beta^2} \\
+    1-2\alpha &= 1 - 2\sqrt{\alpha^2 + \beta^2} \\ 
+    \alpha^2 &= \alpha^2 + \beta^2 \\
+    \beta^2 &= 0
+\end{align*}
+
+So in order for this to occur the imaginary part of the fraction must be zero. It is hopefully obvious 
+that an additional necessary condition is that the fraction must be greater than one. However 
+on the unit disc the ratio of $\sin(z_0)$ and $3z_0^2+1$ is bounded above by 
+
+\begin{align*}
+    \sup_{z_0 \in \partial B(0,1)}\left\{\left|\frac{\sin(z_0)}{3z_0^2+1} \right|\right\} &\leq \sup_{z_0 \in \partial B(0,1)}\left\{\frac{|\sin(z_0)|}{2}\right\} \\
+    &= \sup_{z_0 \in \partial B(0,1)}\left\{\frac{|\sinh(iz_0)|}{2}\right\} \\
+    &=\sup_{z_0 \in \partial B(0,1)}\left\{\frac{|e^{iz_0}-e^{-iz_0}|}{4}\right\} \\
+    &=\sup_{\theta \in [0,2\pi)}\left\{\frac{|e^{\sin(\theta)}+e^{-\sin(\theta)}|}{4}\right\} \\
+    &\leq \frac{e+e^{-1}}{4} < 1
+\end{align*}
+
+So the ratio must be less than 1 and the inequality is strict on the boundary of the unit disc. Therefore Rouche's theorem leads to 
+the following equality
+
+\begin{equation*}
+    \frac{1}{2\pi i}\int_{\partial B(0,1)}\frac{\cos(\zeta) -6\zeta}{\sin(\zeta) - 3\zeta^2-1}d\zeta = \frac{1}{2\pi i}\int_{\partial B(0,1)}\frac{6\zeta}{3\zeta^2+1}
+\end{equation*}
+
+Clearly $3z^2+1$ is non-vanishing on the boundary. Furthermore, a previous calculation implies that 
+
+\begin{align*}
+    \sup_{z_0 \in \partial B(0,1)}\{|\sin(z_0)\} < 2 &= \inf_{z_0 \in \partial B(0,1)}\{3z_0^2+1\} \\
+    \implies \sup_{z_0 \in \partial B(0,1)}\{|3z_0^2+1-\sin(z_0)|\} &> 0 \\
+    \implies \sup_{z_0 \in \partial B(0,1)}\{|\sin(z_0)-3z_0^2-1|\} &> 0 \\
+\end{align*}
+
+So both of these are non-vanishing on the boundary. Thus we obtain that the number of zeros (counting multiplicities) 
+on the unit disc is the same as the number of roots of $3z^2+1$. Since there are clearly two 
+roots on the unit disc it follows that the number of zeros of $\sin(z) -3z^2-1$ (counting multiplicities) 
+is two.
+
+\paragraph{}
+Finally to find the number of unique solutions, we must ensure that this is not a double root of 
+the function $\sin(z)-3z^2-1$. If a zero of this function were a double root, this would imply that 
+the derivative of this function $\cos(z)-6z$ would also be zero at this point. It is straightforward to 
+repeat the analysis conducted above and see that 
+
+\begin{equation*}
+    \sup_{z_0 \in \partial B(0,1)}\left\{\left|\frac{\cos(z_0)}{6z}\right|\right\} \leq \frac{e+e^{-1}}{12}
+\end{equation*}
+
+So (by an identical argument to that above) both $\cos(z)-6z$ and $6z$ are non-vanishing on the boundary of the unit disk and we can use Rouche's theorem to 
+show that the number of zeros of $\cos(z)-6z$ and $6z$ (counting multiplicities) must be the same 
+on the interior of the disk. Since $6z$ has only one zero on the interior of the unit disk it follows 
+that the derivative of $\sin(z)-3z^2-1$ must also have one zero in this region. Since $\cos(x)$ and 
+$6x$ intersect on the interval $[0,1)$ the only zero of the derivative must occur on the real line 
+between zero and one. However, on the real line $\sin(z) < 3z^2+1$ everywhere so there cannot be a 
+zero of the function in this segment. 
+
+\paragraph{}
+Therefore the zeros of $\sin(z)-3z^2-1$ must be of order 1 and thus distinct. It follows from this 
+that there are two zeros of this function and thus two solutions of the equation $\sin(z) = 3z^2+1$ 
+on the interior of the unit disk.
+
+
+\end{document}

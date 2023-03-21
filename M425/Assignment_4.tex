@@ -1,0 +1,78 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH425 Assignment 4\\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{mathrsfs}
+
+\begin{document}
+
+\maketitle
+
+\section*{W6Q3}
+Because $f$ is continuous and $f(0) = 0$, we can choose a $\delta > 0$ such that $\forall x \in B(0,\delta)$ 
+we have $|f(x)| < \epsilon$, $\epsilon < 1$. Then since all polynomials are continuous, for 
+every $k \in \mathbb{N}$ we have that $(f(z))^k$ is continuous and $|f(z)|^k < \epsilon^k$. 
+Therefore for all $\{a_k\}_{k=0}^\infty$ bounded by $M > 0$ we have
+
+\begin{equation*}
+    \left|\sum_{k=0}^\infty a_k(f(z))^k\right| \leq \sum^\infty_{k=0}|a_k||f(z)|^k \leq \sum_{k=0}^\infty M\epsilon^k = M\frac{\epsilon}{1-\epsilon}
+\end{equation*}
+
+Thus every function in this family is uniformly bounded and converges uniformly by direct application 
+of the Weierstrass M-test. Since convergence is uniform, it follows that each function in the family 
+is continuous by the properties of uniform convergence (each term in the series for that function will be continuous, so each 
+partial sum will be continuous and thus the limiting function will also be continuous). Thus this family of continuous functions is 
+uniformly bounded.
+
+
+\section*{W7Q3}
+It will be convenient to show that $h(x) = \sqrt{x + 1}$ is a contraction mapping. Assuming $\mathbb{R}$ 
+is equipped with the usual metric we have that (for $x,y \geq 0$) 
+
+\begin{align*}
+	|\sqrt{x+1} - \sqrt{y+1}| &= \frac{\sqrt{x+1} + \sqrt{y+1}}{\sqrt{x+1} + \sqrt{y+1}}|\sqrt{x+1} - \sqrt{y+1}| \\
+	& = \left|\frac{x+1 -y - 1}{\sqrt{x+1} + \sqrt{y+1}}\right| \\
+	&= \frac{|x-y|}{\sqrt{x+1} + \sqrt{y+1}} \\
+	& \leq \frac{1}{2}|x-y|
+\end{align*}
+
+So $h$ is a contraction mapping. Furthermore, it is useful to note that $h(x) \geq 0$ for all $x \geq 0$. 
+Let $h^n$ denote repeated composition of the function $h$ so $h^2 = h \circ h$, etc (it is also 
+convenient to let $h^0(x) = x$). These functions constructed by repeated composition are from $\mathbb{R}$ to $\mathbb{R}$ if $x \geq 0$ as $h(x) \geq 0$ 
+for all $x \geq 0$. Then 
+we can rewrite $|f_n(x) - f_n(y)| = |h^{n-1}(f_1(x)) - h^{n-1}(f_1(y))|$ for $x,y \in [0,1]$, $n \in \mathbb{N}$. 
+Then $f_1(x) = x$ so $|f_n(x) - f_n(y)| = |h^{n-1}(x) - h^{n-1}(y)| \leq |x-y|$ as $h$ is a 
+contraction mapping. Therefore, $\forall \epsilon > 0$ take $\delta = \epsilon$. If $x,y \in [0,1]$ and 
+$|x-y| < \delta = \epsilon$, $|f_n(x) - f_n(y)| \leq |x-y| < \delta = \epsilon$ for all $n \in \mathbb{N}$ 
+and so this family of functions is equicontinuous.
+
+\end{document}

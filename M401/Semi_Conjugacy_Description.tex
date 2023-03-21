@@ -1,0 +1,53 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/ }}
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+
+\begin{document}
+
+\paragraph{}
+To establish chaos we will wish to develop a semi-conjugacy from some simpler shift-space. Since 
+we have already established the orbit of $x= 1/2$ divides the interval into a finite number of 
+sub-intervals and that applying the map to these intervals induce a system of F-coverings. 
+[INSERT INFO ABOUT THE COVERING HERE]
+
+\paragraph{}
+We can then construct a string space, using an alphabet where each element in the alphabet is the 
+name of one of the intervals. One can exclude a set of two cylinders by excluding all cylinders of 
+the form $I_jI_k$ where $f(I_j)$ does not cover $I_k$. This then leads to an adjacency matrix $A$ 
+and a sub-shift of finite type $\Sigma_A$. If one could verify that $(\Sigma_A,\sigma)$ contains a 
+chaotic invariant set $\Omega$ then this suggests we could hopefully construct a semi-conjugacy between these spaces. 
+
+\paragraph{}
+Assuming that $(\Sigma_A,\sigma)$ is chaotic then we construct a function 
+$\psi: \Sigma_A \rightarrow X$. For some $s \in \Sigma_A$, we search for $x_0 \in X$ such that 
+for each $x_n = f^n(x_0) \in \mathcal{O}(x)$, $x_n \in \bar{I_n}$ where $I_n$ is the interval in the 
+n-th place of $s$. Lemma 20 guarantees that such a point exists and if it possible to show that 
+this is unique then this produces a well-defined function. 
+
+\paragraph{}
+This function is obviously a semi-conjugacy if it is well-defined and continuous, so given these assumptions then 
+theorem 17 guarantees that $\psi(\Omega)$ that this is either a chaotic invariant set or a 
+single periodic orbit. If there are distinct periodic sequences that do not belong to the same orbit 
+in $\Sigma_A$ then these $s_0,s_1$ must correspond to $x_0,x_1$ which are not part of the same orbit 
+in $X$. If this is the case then $\psi(\Omega)$ must not be a single periodic orbit 
+in $X$ and so $\psi(\Omega)$ must be chaotic. Thus we have established our desired result.
+
+\end{document}

@@ -1,0 +1,191 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH425 Assignment 1\\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{mathrsfs}
+
+\begin{document}
+
+\maketitle
+
+\section*{Q2}
+\subsection*{(a)}
+Consider $a_n - a_{n+1}$:
+
+\begin{align*}
+    a_n - a_{n+1} &= \frac{1}{n+1} + \frac{1}{n+2} + \dots + \frac{1}{2n} - \frac{1}{n+2} - \dots - \frac{1}{2n+1} - \frac{1}{2n+2} \\
+    &= \frac{1}{n+1} - \frac{1}{2n+1} - \frac{1}{2n+2} \\
+    &= \frac{2}{2n+2} - \frac{1}{2n+2} - \frac{1}{2n+1} \\
+    &= \frac{1}{2n+2} - \frac{1}{2n+1} < 0
+\end{align*}
+
+So this sequence is monotonically increasing. Since for all $n \in \mathbb{N}$
+
+\begin{equation*}
+    a_n = \sum_{j=1}^n \frac{1}{n+j} \leq \sum_{j=1}^n \frac{1}{n+1} = \frac{n}{n+1} < 1
+\end{equation*}
+
+this sum is bounded above and thus must converge by completeness of the Reals.
+
+\subsection*{(b)}
+Consider the function $f(x) = 1/x$ on $[1,2]$. If we divide $[1,2]$ into intervals of length $1/n$ 
+(so the j-th interval is $[1 + (j-1)/n,1 + j/n]$) we define a partition $P$ and clearly the length 
+of each interval in this partition approaches zero as $n$ approaches infinity. Let us evaluate the 
+function at the right-hand of each interval, so $x_j = 1 + j/n = (n+j)/n$. Therefore we can express 
+the n-th Riemann sum of the integral of this function (on this domain) as 
+
+\begin{equation*}
+    \sum^n_{j=1}\frac{1}{n}\frac{n}{n+j} = \sum^n_{j=1}\frac{1}{n+j} = a_n
+\end{equation*}
+
+Since this function is Riemann integrable on this domain, it follows that 
+
+\begin{equation*}
+    \lim_{n \rightarrow \infty} a_n = \int_1^2\frac{1}{x}dx = \left[\ln(x)\right]_1^2=\ln(2)
+\end{equation*}
+
+So the limit of $a_n$ is $\ln(2)$.
+
+\section*{Q3}
+\subsection*{(a)}
+It is useful to note that for all $n \in \mathbb{N}$
+
+\begin{equation*}
+    \sum_{j=1}^{2n+1}\frac{(-1)^j}{j+1} = \sum^n_{k=0}\left(\frac{(-1)^{2k}}{2k+1} + \frac{(-1)^{2k+1}}{2k+2}\right) = \sum^n_{k=0}\left(\frac{1}{2k+1} - \frac{1}{2k+2}\right)
+\end{equation*}
+
+By an identical argument it is straightforward to see that 
+
+\begin{align*}
+    \sum_{j=0}^{2n+1}\frac{(-1)^j}{j+1} + \sum_{j=1}^{2n+2}\frac{(-1)^j}{j+1} &= \sum_{k=0}^n\left(\frac{1}{2k+1}-\frac{1}{2k+2}\right) + \sum_{k=0}^{n}\left(-\frac{1}{2k+2} + \frac{1}{2k+3}\right) \\
+    &= \sum_{k=0}^n\left(\frac{1}{2k+1} - \frac{2}{2k+2} + \frac{1}{2k+3}\right)
+\end{align*}
+
+But clearly 
+
+\begin{equation*}
+    \sum_{k=0}^n\left(\frac{1}{2k+1} - \frac{2}{2k+2} + \frac{1}{2k+3}\right) = 2\sum_{j=1}^{2n+1}\frac{(-1)^j}{j+1} + \frac{1}{2n+3} -1
+\end{equation*}
+
+A simple rearrangement then gives the desired result 
+
+\begin{equation*}
+    1+ \sum_{k=0}^n\left(\frac{1}{2k+1} - \frac{2}{2k+2} + \frac{1}{2k+3}\right) = \frac{1}{2n+3}+ 2\sum_{j=1}^{2n+1}\frac{(-1)^j}{j+1}
+\end{equation*}
+
+It is also useful to note that, since this result holds true for any $n \in \mathbb{N}$, it 
+will hold true in the limiting case where $n \rightarrow \infty$.
+
+\subsection*{(b)}
+We know from Tutorial 2 that this series converges uniformly on this interval, so we can integrate 
+term-by-term. Therefore (using the result from tutorial 2)
+
+\begin{equation*}
+    \int_{0}^1 \frac{1-x}{1+x}dx = \sum_{k=0}^\infty \int_0^1 x^{2k}(1-x)^2 dx 
+\end{equation*}
+
+Considering the LHS of this equation, it is straightforward to compute the integral 
+
+\begin{align*}
+    \int_0^1 \frac{1-x}{1+x}dx &= \int_0^1 \frac{1}{1+x}dx - \int_0^1 \frac{x}{1+x}dx \\
+    &= \left[\ln(|1+x|)\right]_0^1 - \left[x\ln(|x+1|)\right]_0^1 + \int_0^1 \ln(|1+x|)dx \\
+    &= \ln(2) - \ln(2) + \left[(1+x)\ln(1+x) - x\right]_0^1 \\
+    &= 2\ln(2) - 1
+\end{align*}
+
+Therefore we have 
+
+\begin{align*}
+    2\ln(2) - 1 &= \sum_{k=0}^\infty \int_0^1 x^{2k}(1-2x + x^2)dx \\
+    &= \sum_{k=0}^\infty \left[\frac{1}{2k+1}x^{2k+1} - \frac{2}{2k+2}x^{2k+2} + \frac{1}{2k+3}x^{2k+3}\right]_0^1 \\
+    &= \sum_{k=0}^\infty\left(\frac{1}{2k+1} - \frac{2}{2k+2} + \frac{1}{2k+3}\right) \\
+    \implies 2\ln(2) &= 1+\sum_{k=0}^\infty\left(\frac{1}{2k+1} - \frac{2}{2k+2} + \frac{1}{2k+3}\right)
+\end{align*}
+
+By the result proved in (a), we have 
+
+\begin{equation*}
+    2\ln(2) = \lim_{n\rightarrow\infty} \left(\frac{1}{2n+3} + 2\sum_{j=0}^{n}\frac{(-1)^j}{j+1}\right) = 2\sum_{j=0}^\infty \frac{(-1)^j}{j+1}
+\end{equation*}
+
+Therefore 
+
+\begin{equation*}
+    \int_0^1\frac{2}{1+x}dx = 2\ln(2) = 2\sum_{j=0}^\infty \frac{(-1)^j}{j+1} \implies \int_0^1\frac{1}{1+x}dx = \sum_{j=0}^\infty \frac{(-1)^j}{j+1}
+\end{equation*}
+
+As required.
+
+\section*{Q1}
+Consider a sequence of functions $f_n(x)$ with $f_1(x) = 0$ everywhere and for $n \geq 2$ 
+
+\begin{equation*}
+    f_n(x) = \begin{cases}
+        n^{11/6}x & 0 \leq x < \frac{1}{n} \\
+        2n^{5/6} - n^{11/6}x & \frac{1}{n} \leq x <\frac{2}{n} \\
+        0 & x \geq \frac{2}{n}
+    \end{cases}
+\end{equation*}
+
+It is straightforward to verify that this function is continuous. Furthermore, for all $n \in \mathbb{N}$ 
+$f_n(0) = 0$ and for $0 < x \leq 1$ there exists some $N$ such that for all $n \geq N$, $1/n < x$. Therefore, 
+by the Archimedean property $f_n$ converges pointwise to zero. Thus this function fulfills the 
+first property. It is useful to note that the segment of the function from $x =0$ to $x = 2/n$ is 
+symmetric about $x = 1/n$ (so the squared function on this interval will also be symmetric about 
+the same point).
+
+\paragraph{}
+Considering the second property, we can see that for all $n \in \mathbb{N}$, $n >1$
+
+\begin{align*}
+    \int_0^1 |f_n(x)|dx &= \int_{0}^{1/n}n^{11/6}xdx + \int_{1/n}^{2/n}2n^{5/6} - n^{11/6}x dx \\
+    &= \left[\frac{1}{2}n^{5/6}x^2\right]_0^{1/n} + \left[2n^{5/6}x - \frac{1}{2}n^{11/6}x^2\right]_{1/n}^{2/n} \\
+    &= \frac{1}{2}\left(\frac{1}{n}\right)^{1/6} + 2\left(\frac{1}{n}\right)^{1/6} -2\left(\frac{1}{n}\right)^{1/6} + \frac{1}{2}\left(\frac{1}{n}\right)^{1/6} \\
+    &= \left(\frac{1}{n}\right)^{1/6}
+\end{align*}
+
+This clearly approaches zero, so the second condition also holds.
+
+\paragraph{}
+Finally we consider the third property. For all $n \in \mathbb{N}$, $n > 1$ we have 
+
+\begin{align*}
+    \int_0^1 (f_n(x))^2dx &= 2\int_0^{1/n} n^{121/36}x^2dx \qquad \text{By the symmetry noted above} \\
+    &= \frac{2}{3}\left[n^{121/36}x^3\right]_0^{1/n} \\
+    &= \frac{2}{3}\left(n^{121/36}n^{-108/36}\right)\\
+    &= \frac{2}{3}n^{13/36}
+\end{align*}
+
+Then the sequence $I_n = \frac{2}{3}n^{13/36}$ clearly approaches infinity as $n$ approaches infinity. 
+Therefore the third property also holds.
+
+\end{document}

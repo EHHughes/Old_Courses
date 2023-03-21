@@ -1,0 +1,152 @@
+\documentclass{article}
+
+\title{	
+	\normalfont\normalsize 
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{14pt} % Whitespace
+	{\LARGE MATH425 Assignment 1\\ % The assignment title
+    \large \textit{} \\}
+	\vspace{6pt} % Whitespace
+	\rule{\linewidth}{1pt}\\ % Thick bottom horizontal rule
+}
+
+\author{Elliott Hughes}
+\date{\normalsize\today}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{sectsty}
+\usepackage{titlesec}
+
+\begin{document}
+
+\maketitle
+
+\section*{Q4}
+\subsection*{(a)}
+Note at $x=0$, $sin(n(0)) = 0$. At $x\neq 0$ we have 
+
+\begin{equation}
+	\left|\frac{sin(nx)}{1+n^2x^2}\right| < \left|\frac{1}{1+n^2x^2}\right| < \left(\frac{1}{nx}\right)^2
+\end{equation}
+
+Then $\forall \epsilon > 0 \quad\exists N \in \mathbb{N}$ s.t. $\forall n \geq N \implies \frac{1}{n^2} < x^2\epsilon$.
+So $\forall x \in \mathbb{R}$, $\forall \epsilon > 0 \quad\exists N \in \mathbb{N}$ s.t. $\forall n \leq N$
+
+\begin{equation*}
+	\left|\frac{sin(nx)}{1+n^2x^2} - 0 \right| < \epsilon
+\end{equation*}
+
+So $f_n(x)$ converges pointwise to zero.
+
+\subsection*{(b)}
+Consider the sequence of points $\{1/n\}_{n=1}^\infty$. At each point in this sequence we have that 
+
+\begin{equation*}
+	\frac{sin(1)}{1 + 1/n} \neq 0
+\end{equation*}
+
+And in the limiting case $f_n(1/n) \rightarrow sin(1) \neq 0$. So this sequence does not converge 
+uniformly as $\exists x_* \in \mathbb{R}$ s.t. $\exists \epsilon < sin(1)/2$ s.t. $\forall n \in \mathbb{N}$, $n >0$ 
+we have that $|f_n(x_*)| > \epsilon$.
+
+\section*{Q5}
+\subsection*{(a)}
+Note for $r \in (0,1) \quad \forall \epsilon > 0 \quad \exists N \in \mathbb{N}$ s.t. $\forall n \geq N$ we 
+have $r^{2n} < \epsilon$. Thus $\forall r \in (0,1) \quad \exists N \in \mathbb{N}$ s.t. $\forall n \geq N \implies 
+r^{2n} < 1/2 \implies 1 < 2(1-r^{2n}) \implies 1/(1-r^{2n}) < 2$ as required.
+
+\subsection*{(b)}
+Note that at $x = 1,-1$ each term in the series is undefined so the infinite sum is thus also 
+undefined. Considering the separate subdomain in turn, we will first turn to $x \in (-1,1)$. 
+Inside this domain, we can apply the ratio test to determine the series' convergence.
+
+\begin{equation*}
+	R_n(x) = \left|\left(\frac{x^{n+1}}{1-x^{2n+2}}\right)/\left(\frac{x^n}{1-x^{2n}}\right)\right| = \left|\frac{x(1-x^{2n})}{1-x^{2n+2}}\right| = \left|\frac{x-x^{2n+2}}{1-x^{2n+2}}\right|
+\end{equation*}
+
+Since $x \in (-1,1)$ in the limit $R_n(x)$ will clearly approach $|x| < 1$ and so by the ratio test we 
+have that $R_n(x)$ converges pointwise when $x \in (0,1)$. For $x > 1$ we have 
+
+\begin{equation*}
+	\left|\frac{x^n}{1-x^{2n}}\right| = \left|\frac{1}{(1-x^n)(1+x^n)}\right| < \left|\frac{1+x^n}{(1-x^n)(1+x^n)}\right| = \left|\frac{1}{1-x^n}\right|
+\end{equation*}
+
+Then we can apply the ratio test to see that 
+
+\begin{equation*}
+	R_n(x) = \left|\left(\frac{1}{1 - x^{n+1}}\right)/\left(\frac{1}{1 - x^{n}}\right)\right| = \left|\frac{1 - x^n}{1 - x^{n+1}}\right|
+\end{equation*}
+
+Since $x > 1$ it follows that in the limit that $R_n(x)$ for this series will converge to $1/x < 1$. 
+Therefore the series $\sum_{n=1}^{\infty}|1/(1-x^n)|$ converges by the ratio test.
+Thus the series $|S(x)| = \sum_{n=1}^{\infty}|x^n/(1-x^{2n})|$ is bounded above for all $x > 1$ and 
+(since each individual term is strictly positive) it must converge to a finite limit by the 
+completeness axiom. Since $\sum_{n=1}^{k}|x^n/(1-x^{2n})| \geq \left|\sum_{n=1}^{k}x^n/(1-x^{2n})\right|$ 
+we obtain absolute convergence for any $x$ s.t. $|x| > 1$. Therefore the set $E$ on which 
+$S(x)$ converges pointwise is $E = \{x \in \mathbb{R}:|x| \neq 1\}$.
+
+\paragraph{}
+We must now consider the question of uniform convergence. 
+Note that each individual term has the derivative 
+
+\begin{align*}
+	f'_n(x) &= \frac{nx^{n-1}(1-x^{2n}) + 2nx^{2n-1}x^n}{(1-x^{2n})^2} \\
+	&= \frac{nx^{n-1}-nx^{3n-1} + 2nx^{3n-1}}{(1-x^{2n})^2} \\
+	&= \frac{nx^{n-1}+nx^{3n-1}}{(1-x^{2n})^2} \\
+	&= \frac{nx^{n-1}(1 + x^{2n})}{(1-x^{2n})^2}
+\end{align*}
+
+So for a closed interval $[a,b]$ inside the domain of the series and with $a > 0$
+ the absolute value of each term will be maximized either at 
+one of the end points or at $x=0$ (as this is the only point where $f'_n = 0$) if this is inside the closed interval. Since the series 
+converges absolutely pointwise we can thus set $M_n$ equal to the sum of the absolute value of each term at both endpoints and at $x=0$ (if this 
+is inside the interval) and obtain a series $\sum_{n=1}^{\infty}M_n$. This series must be convergent 
+as the sum of two or more convergent series is itself convergent. Then it follows that for each 
+point inside the closed interval we have $|x^n/(1-x^{2n})| < M_n$ and so the Weierstrass M-test 
+can be applied directly to show that the series converges uniformly inside this interval. Then 
+since convergence for every interval $[a,b]$ in the domain of the series with $a > 0$ implies absolute 
+convergence for any interval in the domain of the series (see the argument for pointwise 
+convergence above) the series converges uniformly in every 
+closed interval inside the domain of $S(x)$.
+
+\subsection*{(c)}
+Note from above that we have (for $x > 1$)
+
+\begin{equation*}
+	\left|\frac{x^n}{1-x^{2n}}\right| < \left|\frac{1}{1-x^n}\right| < \left|\frac{1}{(1-x)^n}\right| = \left|\frac{1}{1-x}\right|^n = \left(\frac{1}{x-1}\right)^n
+\end{equation*}
+
+So this series converges to $\delta/(1-\delta)$ where $\delta = |1/(1-x)|$ by the properties of 
+geometric series. Note that the function $g(x) = 1/(x-1)$ has a range that spans all the 
+positive reals and that it is clearly monotonically decreasing.
+Then for all $\epsilon > 0$ choose $x_* > 1$ s.t. $\forall x \geq x_*$ we have that 
+$1/(x-1) \leq \delta_*$ where
+
+\begin{equation*}
+	\delta_* < \frac{\epsilon}{1+\epsilon}
+\end{equation*}
+
+Thus for every $\epsilon > 0 \quad \exists x_*$ s.t. $\forall x > x_*$ we have 
+
+\begin{equation*}
+	\left|\sum_{n=1}^{\infty}\frac{x^n}{1-x^{2n}}\right|<\sum_{n=1}^{\infty}\left|\frac{x^n}{1-x^{2n}}\right| < \sum_{n=1}^{\infty}\left(\frac{1}{x-1}\right)^n \leq \frac{\delta_*}{1-\delta_*}<\epsilon
+\end{equation*}
+
+Therefore $\lim_{x \rightarrow \infty}S(x) = 0$. 
+
+\end{document}
